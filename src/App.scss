@@ -1,0 +1,18 @@
+.main-layout {
+  display: flex;
+  height: 100vh; // Full height to cover the viewport
+  width: 100vw; // Full width to cover the viewport
+  overflow: hidden; // Prevent scrollbars for layout
+}
+
+.navbar {
+  width: 10px; // Fixed width for the navbar
+  height: 100%; // Take full height of the screen
+  background-color: #f4f4f4; // Placeholder color (customize later)
+  flex-shrink: 0; // Prevent navbar from shrinking
+}
+
+.outlet-content {
+  flex: 1; // Take up the remaining space
+  overflow-y: auto; // Enable scrolling for content
+}

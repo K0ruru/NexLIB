@@ -1,0 +1,271 @@
+.login {
+  background-color: var(--blue);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.floating-modal {
+  display: flex;
+  background-color: var(--white);
+  padding: 1.8rem;
+  gap: 6rem;
+  border-radius: 1rem;
+  filter: drop-shadow(0px 5px 100px rgba(0, 0, 0, 0.1));
+}
+
+.left {
+  position: relative;
+  background-color: var(--blue);
+  width: 30vw;
+  height: 70vh;
+  overflow: hidden;
+  border-radius: 1rem;
+  filter: drop-shadow(20px 5px 20px rgba(0, 0, 0, 0.1));
+
+  .wave-container {
+    position: absolute;
+    bottom: -0.625rem;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+  }
+
+  .graphic {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+.floating-glass {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glass {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 85%;
+  height: 85%;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(29, 29, 29, 0.5);
+  padding: 4rem 3rem;
+  backdrop-filter: blur(5px);
+  outline: 1.5px solid rgba(29, 29, 29, 0.7);
+  border-radius: 0.875rem;
+
+  .logo {
+    max-width: 33%;
+    transform: translateX(-0.3125rem);
+  }
+
+  .line {
+    width: 18%;
+    border-bottom: 1px solid var(--white);
+    margin-top: 1rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .text-content {
+    color: var(--white);
+
+    h2 {
+      font-weight: 500;
+      font-size: 0.8rem; /* Adjust as needed */
+      margin-bottom: 0.2rem;
+    }
+
+    h1 {
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      font-size: 1.8rem; /* Adjust as needed */
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 0.58rem; /* Adjust as needed */
+    }
+  }
+
+  .footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: var(--white);
+
+    strong {
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 0.49rem; /* Adjust as needed */
+    }
+  }
+}
+
+.right {
+  width: 30vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  form {
+    width: 85%;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 38px;
+    letter-spacing: 3px;
+    margin-bottom: 3.5rem;
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+  }
+
+  .input-container {
+    position: relative; /* Allows absolute positioning for the icon */
+    width: 100%;
+
+    .input-icon {
+      position: absolute;
+      left: 0.8rem; /* Adjust based on padding */
+      top: 55%;
+      transform: translateY(-50%); /* Centers the icon vertically */
+      color: #dadada; /* Match the placeholder color */
+      pointer-events: none; /* Ensures the icon doesn’t block input clicks */
+    }
+
+    input {
+      width: 100%;
+      padding: 0.9rem 0.8rem;
+      padding-left: 2.8rem; /* Add padding to the left for the icon */
+      border-radius: 6px;
+      background-color: var(--white);
+      border: 1px solid #dadada;
+      font-weight: 500;
+      font-size: 0.8rem;
+      outline: none;
+      &:focus {
+        border: 1px solid var(--yellow);
+      }
+    }
+  }
+}
+
+::placeholder {
+  color: #dadada;
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, var(--yellow), var(--soft-yellow));
+  color: var(--black);
+  font-weight: 500;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 2rem;
+
+  transition: transform 0.2s ease-in-out;
+}
+
+.login-button:hover {
+  background: linear-gradient(to left, var(--yellow), var(--soft-yellow));
+  transform: scale(1.01);
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space between checkbox and label */
+  position: relative;
+  margin-bottom: 2rem;
+  margin-top: -0.3rem;
+
+  /* Hide the native checkbox */
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* Custom checkmark */
+  .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px; /* Size of the custom checkbox */
+    height: 20px;
+    background-color: var(--white);
+    border: 1px solid #dadada;
+    border-radius: 4px; /* Optional: rounded corners */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Checkmark changes on checked state */
+  input:checked ~ .checkmark {
+    background-color: var(--yellow); /* Change to your primary color */
+    border: 1px solid #cda318;
+    box-shadow: 0 0 5px rgba(217, 175, 36, 0.6); /* Add glow effect */
+  }
+
+  /* Add a check symbol */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none; /* Hidden by default */
+  }
+
+  /* Show checkmark when checked */
+  input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  /* Style the checkmark (✓ symbol) */
+  .checkmark:after {
+    left: 7px; /* Adjust based on size */
+    top: 4px;
+    width: 3px;
+    height: 6px;
+    border: solid var(--black);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg); /* Create the ✓ shape */
+  }
+
+  /* Label styling */
+  label {
+    cursor: pointer;
+    font-size: 0.7rem; /* Adjust font size as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+}
