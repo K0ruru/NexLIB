@@ -1,18 +1,65 @@
-import React, { useState } from "react";
+/* eslint-disable react/no-unescaped-entities */
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import Wave from "../../assets/wave-1.png";
 import NexLIB from "../../assets/NexLIB-logo.png";
 import "boxicons";
+import { Toaster, toast } from "sonner";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState(""); // State for email
+  const [password, setPassword] = useState(""); // State for password
+  const [loading, setLoading] = useState(false); // State for loading spinner
+  const navigate = useNavigate(); // For navigation
 
   const handleTogglePassword = () => {
-    setShowPassword((prev) => !prev); // Toggle the state
+    setShowPassword((prev) => !prev);
+  };
+
+  const { login } = useAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent page reload
+    setLoading(true);
+
+    if (!email || !password) {
+      toast.error("Both email and password are required!");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Login successful!");
+        login(response.data.token);
+        navigate("/dashboard", { state: { success: "Login successful!" } });
+      }
+    } catch (error) {
+      if (error.response?.status === 401) {
+        toast.error("Invalid email or password!");
+      } else {
+        toast.warning("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
+      <Toaster richColors />
       <div className="login">
         <div className="container">
           <div className="floating-container">
@@ -50,7 +97,7 @@ export default function Login() {
 
               <div className="right">
                 <h1>Login</h1>
-                <form action="#">
+                <form onSubmit={handleSubmit}>
                   <div className="input-group">
                     <label htmlFor="email">Email Address</label>
                     <div className="input-container">
@@ -66,6 +113,8 @@ export default function Login() {
                         id="email"
                         name="email"
                         placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} // Update email state
                         required
                       />
                     </div>
@@ -86,6 +135,8 @@ export default function Login() {
                         id="password"
                         name="password"
                         placeholder="Enter your password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)} // Update password state
                         required
                       />
                     </div>
@@ -105,8 +156,12 @@ export default function Login() {
                     </label>
                   </div>
 
-                  <button type="submit" className="login-button">
-                    login →
+                  <button
+                    type="submit"
+                    className="login-button"
+                    disabled={loading}
+                  >
+                    {loading ? "Logging in..." : "login →"}
                   </button>
                 </form>
               </div>

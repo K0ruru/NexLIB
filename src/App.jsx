@@ -1,4 +1,3 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,6 +8,7 @@ import "./app.scss";
 
 // Components
 import Navbar from "./components/Navbar/navbar";
+import ProtectedRoute from "./middleware/ProtectedRoutes";
 
 // Pages
 import LoginPage from "./pages/login/login";
@@ -18,9 +18,17 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Public Route: Login */}
         <Route path="/" element={<LoginPage />} />
 
-        <Route element={<MainLayout />}>
+        {/* Protected Route */}
+        <Route
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>

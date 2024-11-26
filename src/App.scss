@@ -5,6 +5,15 @@
   overflow: hidden; // Prevent scrollbars for layout
 }
 
+.wave-2 {
+  position: absolute; /* Place it relative to .main-layout */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1; /* Ensure it is behind everything else */
+  pointer-events: none; /* Avoid any interference */
+}
+
 .navbar {
   width: 10px; // Fixed width for the navbar
   height: 100%; // Take full height of the screen

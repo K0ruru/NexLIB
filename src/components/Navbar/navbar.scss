@@ -1,5 +1,6 @@
 .nav {
   width: 21vw;
+  background-color: var(--white);
 }
 
 .nav-content {
@@ -55,6 +56,8 @@
     }
 
     &:hover {
+      scale: 1.1;
+
       &.active {
         background-color: #5db6da9a;
       }

@@ -1,10 +1,26 @@
+/* eslint-disable react/no-unescaped-entities */
 import "./navbar.scss";
 
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import NexDark from "../../assets/NexDark.png";
 import "boxicons";
 
 export default function Navbar() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    // Perform logout action
+    logout();
+
+    // Redirect the user to the login page after logging out
+    navigate("/");
+  };
+
   return (
     <>
       <div className="nav">
@@ -52,7 +68,7 @@ export default function Navbar() {
               <p className="role">Staff</p>
             </div>
           </div>
-          <div className="logout">
+          <div className="logout" onClick={handleLogout}>
             <box-icon
               name="log-out"
               animation="tada-hover"
